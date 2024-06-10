@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습3</title>
+    <style>
+        /* .on {
+            background-color: #bcc;
+        } */
+
+        div{
+            display: flex;
+            justify-content: center;
+            align-items:center;
+        }
+        #one{
+            width: 400px;
+            height: 300px;
+            background-color: rgb(14, 130, 146);
+        }
+        #two{
+            width: 300px;
+            height: 200px;
+            background-color: black;
+        }
+        #three{
+            width: 200px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+</head>
+
+    <!-- <div id="content"></div>
+    <ul>
+        <li class="item on">1</li>
+        <li class="item">2</li>
+        <li class="item">3</li>
+        <li class="item">4</li>
+    </ul> -->
+
+    <!--최초의 리스트는 비어있다.-->
+    <!-- <ul id = "list">  </ul>
+
+    <button id="alertBtn">버튼</button> -->
+
+<body>
+    <div id="one">
+        <div id="two">
+            <div id="three">
+            </div>
+        </div>
+    </div>
+
+<script>
+
+//----------이벤트 전달과정---------------------------------------------
+
+    // document.querySelector("#one").addEventListener("click", (e)=>{
+    //     console.log("one");
+    // });
+    // document.querySelector("#two").addEventListener("click", (e)=>{
+    //     console.log("two");
+    // });
+    // document.querySelector("#three").addEventListener("click", (e)=>{
+    //     console.log("three");
+    // });
+
+    // 가운데가 three인데 three를 누르면 one, two, three가 모두 나온다.
+    // DOM에서의 이벤트 전달 시스템과 관련이 있다고 한다.
+    // 자바스크립트는 이벤트가 발생한 이벤트의 처리가 끝나면 부모한테 이벤트가 넘어간다고 한다.
+    // html 최상단까지 계속 일어난다.
+    // 이러한 것을 이벤트 버블링이라고 한다.
+    // 이러한 전파를 막고 하위 요소가 클릭되었을 때 해당 요소만 이벤트를 처리하기 위한 코드를 밑에 작성했다.
+
+//----------------------------------------------------------------------------
+
+    // document.querySelector("#one").addEventListener("click", (e)=>{
+    //   if(e.target.id == "one"){
+    //     console.log("one");
+    //   }
+    // });
+    // document.querySelector("#two").addEventListener("click", (e)=>{
+    //     if(e.target.id == "two"){
+    //     console.log("two");
+    //   }
+    // });
+    // document.querySelector("#three").addEventListener("click", (e)=>{
+    //     if(e.target.id == "three"){
+    //     console.log("three");
+    //   }
+    // });
+    
+    // 위 코드는 one을 누르면 one이 콘솔에 출력되고 
+    // two를 누르면 two가 콘솔에 출력되고
+    // three를 누르면 three가 출력이 된다.
+
+//-------------------------------------------------------------------------------------------- 
+
+        // document.querySelectorAll("div").forEach(x => {
+        //     x.addEventListener("click", e =>{
+        //         console.log(e.target.id);
+        //         e.stopPropagation();
+        //     });
+        // });
+
+        //위 코드와 동일한 기능을 수행하지만 훨씬 짧고 깔끔하게 작성되었다.
+        //qureySelectorAll로 배열로 가져와 모든 div에 대한 click이벤트 리스너를 달아주고 
+        //해당 아이디를 출력하게 한것이다.
+        //stopPropagation기능을 호출하면 이벤트 발생 이후로는 전파가 되지 않게 된다.
+
+//--------------------------------------------------------------------------------------------    
+
+    // document.querySelector("#one").addEventListener("click", (e)=>{
+    //     console.log("one");
+    //     console.log(e.target, e.currentTarget);
+    // });
+    // document.querySelector("#two").addEventListener("click", (e)=>{
+    //     console.log("two");
+    //     console.log(e.target, e.currentTarget);
+    // });
+    // document.querySelector("#three").addEventListener("click", (e)=>{
+    //     console.log("three");
+    //     console.log(e.target, e.currentTarget);
+    // });
+    // one를 클릭하면 one만 콘솔에 출력이 된다.
+    // two를 클릭하면 two와 one을 출력한다.
+    // three를 클릭하면 one two three가 출력된다.
+    // 안에서부터 순서대로 출력이 된다.
+
+//-------classList관리하기---------------------------------------
+
+        // let first = document.querySelector("ul .item:nth-child(1)");
+        // first.classList.remove("on");
+        // let second = document.querySelector("ul .item:nth-child(2)");
+        // second.classList.add("on");
+
+        //li에 on클래스가 있어서 원래대로라면 첫 번째 리스트 아이템이 파란색으로 변해야하는데
+        // JS코드에 의해서 첫번째 아이템은 remove로 클래스가 빠졌고 
+        // 두번째 item은 add로 인해서 on 클래스가 추가됨. 이 때문에 2번 아이템에 파란색 배경이 생겼다.
+        
+        //-------DOM생성하기---------------------------------------
+
+        // let list = document.querySelector("#item");
+
+        // for(let i = 0; i < 10; i++){
+        //     let li = document.createElement("li");
+        //     li.innerHTML = "아이템" + i;
+        //     list.appendChild(li); 
+        // }
+
+        // 아이템0 ~ 아이템9 까지 출력된다.
+        //var element = document.createElement(tagName[, options]); 형식으로 작동된다.
+
+
+//--------버튼 이벤트 작성하기------------------------------------------
+
+        // let btn = document.querySelector("#alertBtn");
+        // btn.addEventListener("click", function(e){
+        //     alert("버튼 클릭");
+        // });
+        //버튼 누르면 메시지창 뜸
+
+        //target.addEventListener(type, listener[, options]);
+        //target.addEventListener(type, listener[, useCapture]); 이런 형식이 있다.
+        // (type, listener[, options]) type는 이벤트의 타입이다. 위 코드에서는 'click'를 사용했다.
+        // listener은 이벤트가 발생핬을 때 실행할 함수이다.
+        // 이때 파라미터로는 event 객체가 들어오게 된다.
+        // 위 코드에서는 e라는 변수가 event 객체이다.
+        // 이벤트 객체에는 이벤트에 관련되 여러 가지 정보가 담겨있다.
+        // 3번째 파라미터는 option 오브젝트를 넘기거나 true, false로 이벤트 캡쳐 여부를 보낼 수 있다.
+        // 옵션 종류는 capture, once, passive가 있다. 옵션을 지정하지 않으면 전부 false로 넘어간다.
+
+//----------capture 옵션 (capture:true)----------------------------------------------------------------------------------  
+
+            // document.querySelectorAll("div").forEach(x => {
+            //     x.addEventListener("click", e => {
+            //         console.log(e.currentTarget.id);
+            //     }, { capture:true});
+            // });
+
+            // 앞에서의 코드들은 three > two > one 의 순서였지만
+            // capture 옵션을 true로 주어서
+            // one > two > three의 순서로 출력이 된다.
+            //  
+
+//----------capture 옵션 (once:true)----------------------------------------------------------------------------------  
+                
+            document.querySelectorAll("div").forEach(x => {
+                x.addEventListener("click", e =>{
+                    console.log(e.currentTarget.id);
+                }, {capture:true, once:true});
+            });
+
+            //once 옵션을 주어서 1회 이벤트 처리후 해당 이벤트 리스너가 사라진다.
+            // 보통 네트워크에서 데이터를 받아오는 처리 등에서 
+            // 중복적으로 데이터가 요정되지 않도록 하는 버튼에 사용한다.
+            // 
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

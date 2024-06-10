@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열관리하기</title>
+</head>
+<body>
+    <h3>배열을 활용하는 방법</h3>
+    <script>
+        //Array객체
+
+        const data=[
+            {name:"박은서", age:"91", getnder:"여", address:"경기도 안양시"},
+            {name:"박현서", age:"17", getnder:"여", address:"경상도 웅양시"},
+            {name:"박하르", age:"5", getnder:"여", address:"울릉도 백산시"},
+            {name:"박동동", age:"46", getnder:"남", address:"충청도 천안시"},
+            {name:"박하하", age:"34", getnder:"남", address:"강원도 산골시"},
+        ];
+        
+        console.log(data);
+
+        //배열에 저장된 데이터 순회하는 함수
+        // callback함수 forEach(function(d[, index, 원본배열]){}); == java의 for(Person p : person)와 같은 기능
+
+        data.forEach(function(d){
+            console.log(d);
+        }); //데이터 5개 출력
+
+        //filter(function(d[, index, 원본배열]){return boolean}); []는 생략가능한 자료?? 그런거
+        // 배열에 저장된 데이터를 골라낼떄 사용
+        console.log("한번에 출력하기");
+        //나이가 40세 이상인 데이터를 출력
+        // let result = data.filter((d, i, ori)=>{
+        //     return d.age>40;
+        // }).forEach(d=>console.log(d));
+
+        data.filter(d=>d.age>40).forEach(d=>console.log(d));
+        
+        //console.log(result);
+
+        // map((date[, index, ori])=>{return 데이터;});
+        // 새로운 구조의 데이터 배열을 생성할때 사용
+        let result = data.map(d=>d.name);
+        console.log(result);
+
+    </script>
+
+    <ul id="target"></ul>
+    <button onclick="createNames();">출력하기</button>
+
+    <script>
+        const createNames=()=>{
+           const $ul = document.querySelector("#target");
+           data.filter(d=>d.age>40).map(d=>"<li>" + d.name + "</li>")
+           .forEach(d=>$ul.innerHTML+=d);
+            const $ul2 = data.reduce((prev, next)=>{
+                const $li=document.createElement("li");
+                $li.innerText=next.adderss;
+                prev.appendChild($li); 
+                return prev;
+            },document.createElement("ul"));
+            console.log($ul2);
+        }
+
+    </script>
+
+    <h4>promise활용하기</h4>
+    
+    <script>
+        // setTimeout(()=>{
+        //     console.log("첫번째 실행");
+
+        //     setTimeout(()=>{
+        //         console.log("두번째 실행");
+                
+        //         setTimeout(()=>{
+        //             console.log("세번째 실행");
+
+        //             setTimeout(()=>{
+        //                 console.log("네번째 실행");
+
+        //                 setTimeout(()=>{
+        //                     console.log("다섯번째 실행");
+        //                 },200);
+
+        //             },300);
+
+        //         },400);
+
+        //     },500); 
+
+        // },1000);
+
+        // setTimeout(()=>{
+        //     console.log("두번째 실행");
+        // },500); 
+
+        // const pro = new Promise((resolve, reject) =>{
+        //     setTimeout(()=>{
+        //         console.log("pro 첫번째 실행");
+        //         resolve("처리완료");
+        //     }, 1000);
+        // });
+        // pro.then(e=>{
+        //     setTimeout(()=>{
+        //         console.log("pro 두번째 실행");
+        //     }, 300);
+        // }).then (e=>{
+        //     setTimeout(()=>{
+        //         console.log("pro 세번째 실행");
+        //     }, 200);
+        // });
+
+
+        //async await예약어를 이용할 수 있음
+        const testaAsnyc = async function(){
+            await time1();
+            await time2();
+            await time3();
+            return "종료";
+        }
+
+        const time1 =()=> new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+            console.log("1번째");
+            resolve();
+            },300);
+        }); 
+        const time2 =()=> new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+            console.log("2번째");
+            resolve();
+            },300);
+        }); 
+        const time3 =()=> new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+            console.log("3번째");
+            resolve();
+            },300);
+        });
+
+        testaAsnyc().then(e=>console.log(e));
+
+        
+
+    </script>
+
+    
+</body>
+</html>
