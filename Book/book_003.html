@@ -9,7 +9,7 @@
             background-color: #bcc;
         } */
 
-        div{
+        /* div{
             display: flex;
             justify-content: center;
             align-items:center;
@@ -30,6 +30,41 @@
             background-color: red;
         }
 
+---------------------------------------------------------------------------
+
+        section{
+            height: 600px;
+        }
+        section:nth-child(1){
+            background-color: #0077ff;
+        }
+        section:nth-child(2){
+            background-color: #4ea0ff;
+        }
+        section:nth-child(3){
+            background-color: #84bdff;
+        }
+        section:nth-child(4){
+            background-color: #c0ddff;
+        }
+
+---------------------------------------------------------------------------
+
+        #link{
+            font-size: 30px;
+            text-decoration: none;
+            color: #00df1e;
+        } 
+
+---------------------------------------------------------------------------
+
+
+
+
+
+*/
+     
+
     </style>
 </head>
 
@@ -47,12 +82,12 @@
     <button id="alertBtn">버튼</button> -->
 
 <body>
-    <div id="one">
+    <!-- <div id="one">
         <div id="two">
             <div id="three">
             </div>
         </div>
-    </div>
+    </div> -->
 
 <script>
 
@@ -188,23 +223,158 @@
 
 //----------capture 옵션 (once:true)----------------------------------------------------------------------------------  
                 
-            document.querySelectorAll("div").forEach(x => {
-                x.addEventListener("click", e =>{
-                    console.log(e.currentTarget.id);
-                }, {capture:true, once:true});
-            });
+            // document.querySelectorAll("div").forEach(x => {
+            //     x.addEventListener("click", e =>{
+            //         console.log(e.currentTarget.id);
+            //     }, {capture:true, once:true});
+            // });
 
             //once 옵션을 주어서 1회 이벤트 처리후 해당 이벤트 리스너가 사라진다.
             // 보통 네트워크에서 데이터를 받아오는 처리 등에서 
             // 중복적으로 데이터가 요정되지 않도록 하는 버튼에 사용한다.
-            // 
+            
+</script>
 
+    <!-- <section>1</section>
+    <section>2</section>
+    <section>3</section>
+    <section>4</section> -->
 
+<script>
 
+//------passive 옵션 (passive : false)-----------------------------------------------------
+        // window.addEventListener("mousewheel", e =>{
+        //     let list = [];
+        //     console.log("wheel");
+        //     for(let i = 0; i < list.length; i++){
+        //       for(let j = 0; j < list.length; j++){
+        //         let temp = list[i];
+        //         list[i] = list[j];
+        //         list[j] = temp;
+        //       }
+        //     }
+        //     console.timeEnd("wheel");
+        // }, {passive:false});
+        // windwo.addEventListener("scroll", e =>{
+        //     let list = [];
+        //     console.time("scroll");
+        //     for(let i = 0; i < 100000; i++){
+        //         list.push(i);
+        //     }
+        //     for(let i = 0 ; i < list.length; i++){
+        //         for(let j = 0; j < list.length; j++){
+        //             let temp = list[i];
+        //             list[i] = list[j];
+        //             list[j] = temp;
+        //         }
+        //     }
+        //     console.timeEnd("scroll");
+        // }), {passive:false};
+
+        // scroll이나 wheel모두 하지 않으면 둘 중 하나가 동작하기 때문에 scroll과 wheel 모두에 오버헤드 를 넣었다.
+        // 스크롤시에 동작이 끝나지 않으면 스크롤이 이루어질 수 없기 때문에 스크롤이 멈춘다.
+        //여기서 passive값만 true로 변경해주면 스크롤은 정상적으로 이루어진다.
+        // 현재 크롬 55+ 부터는 body와 window의 스크롤은 개본적으로 passive가 true로 설정되어 있다.
 </script>
 
 
+    <!-- <a id="link" href="http://ww.naver.com">네이버</a> -->
 
+
+<script>
+//------------이벤트 기본 동작의 방지------------------------------------------
+
+            // document.querySelector("#link").addEventListener("click", e => {
+            //     e.preventDefault();
+            //     console.log("기본 동작을 방지하고 이 동작이 실행됩니다.");
+            // });
+
+            //네이버를 클릭하면 콘솔창에 "기본 동작을 방지하고 이 동작이 실행됩니다." 라고 출력이되고 
+            // a테그의 동작을 실해되지 않는다. (그 네이버로 이동하지 않는다고잉..에 그렇습니다.)
+            // event 객체인 e에는 preventDefault라는 매서드가 존재한다.
+            // 이 매서드의 기능은 해당 이벤트의 기본동작을 방지하는 것이다.
+</script>
+
+<!-- 이벤트 위임 -->
+
+<!-- <div id="form">
+    <input type="text" id="todo">
+    <button id="btnAdd">추가</button>
+</div>
+<div id="list">
+    <div class="todo-item">
+        테스트용 1 입니다.
+    </div> 
+    <div class="todo-item">
+        테스트용 2 입니다.
+    </div>
+</div> -->
+
+<script>
+    // window.onload = function(){
+    //     const todo = document.querySelector("#todo");
+    //     const list = document.querySelector("#list"); //querySelector는 값을 가져온다.
+
+    //     //아이템 클릭시 내용을 출력해줌 
+    //     // document.querySelectorAll(".todo-item").forEach(item => { //qureySelectorAll은 배열 여러개의 값을 가져온다.
+    //     //     item.addEventListener("click", e => alert(e.target.innerHTML)); //innerHMLT로 값을 가져온다.
+    //     // })
+
+    //     list.addEventListener("click", e => {
+    //         if(e.target.classList.contains("todo-item")){
+    //             alert(e.target.innerHTML);
+    //         }
+    //     });
+    //     //위 코드와 같은 기능을 수행하지만 이 코드는 이벤트를 해당 객체가 아닌 해당 객체의 부모에게 줌으로서 부모에게 이벤트 발생시 
+    //     // 이벤트를 발생시킨 것이 자식이라면 그 때 작업을 수행하도록 하는 것, 이를 이벤트 위임이라고 부른다.
+    //     // 이를 통해 동적으로 문서위에 나타나는 오브젝트들에 대해서 이벤트를 부여할 수 있게 된다.
+
+    //     //버튼 클릭시 입력한 텍스트를 할일로 넣어주는 코드
+    //     document.querySelector("#btnAdd").addEventListener("click", e => {
+    //         if(todo.value != ""){
+    //             let div = document.createElement("div");
+    //             div.classList.add(".todo-item");
+    //             div.innerHTML = todo.value; //입력한 값을 넣어서 생성한다.
+    //             div.addEventListener("click", e => alert(e.target.innerHTML)); 
+    //             // 이 줄을 추가해주면 이벤트 리스너가 동작하게 되어서 새롭게 추가된 작업도 정상적으로 동작한다.
+    //             list.appendChild(div);
+    //             todo.value = ""; //공백으로 변경
+    //         }
+    //     });
+    // }
+</script>
+
+<table>
+    <tr>
+        <td>
+            <img src="imgs/붕어빵.jpg" alt="image1" id="image1" width="200px" height="140px">
+        </td>
+        <td>
+            <img src="imgs/호떡.jpg" alt="image2" id="image2" width="200px" height="140px">
+        </td>
+    </tr>
+
+</table>
+
+<button id="swapBtn">교체</button>
+
+<script>
+        let img1 = document.querySelector("#image1");
+        let img2 = document.querySelector("#image2");
+        
+        document.querySelector("#swapBtn").addEventListener("click", e =>{
+            // let temp = img1.src;
+            // img1.src = img2.src;
+            // img2.src = temp;
+
+            let temp = img1.getAttribute("src");
+            img1.setAttribute("src", img2.getAttribute("src"));
+            img2.setAttribute("src", temp);
+        });
+
+        
+
+</script>
 
 
 
